@@ -3,45 +3,63 @@ package com.example.myshelf
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import androidx.annotation.NonNull
-
-import com.google.android.gms.tasks.OnFailureListener
-
-import com.google.firebase.firestore.DocumentReference
-
-import com.google.android.gms.tasks.OnSuccessListener
+import android.widget.EditText
+import android.widget.RadioButton
 import com.google.firebase.firestore.FirebaseFirestore
 
-
-
-
-
+/**
+ *
+ * @author enesdurmus
+ */
 
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var button: Button
+    lateinit var _textUserName : EditText
+    lateinit var _textPassword : EditText
+
+    lateinit var _buttonLogin : Button
+    lateinit var _buttonCreateAccount : Button
+    lateinit var _buttonForgotPassword : Button
+
+    lateinit var _radioButtonRememberMe : RadioButton
+
+    lateinit var _internalStorageHandler : InternalStorageHandler
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        button = findViewById(R.id.button2)
+        _radioButtonRememberMe = findViewById(R.id.radioButtonRememberMe)
+        _buttonLogin = findViewById(R.id.buttonLogin)
+        _textUserName = findViewById(R.id.textUserName)
 
-        val db = FirebaseFirestore.getInstance()
+        _internalStorageHandler = InternalStorageHandler(_textUserName)
 
-        button.setOnClickListener{
+        _radioButtonRememberMe.setOnClickListener{
+            _internalStorageHandler.WriteDataToFile("seaaaaa".toByteArray())
+        }
 
+
+
+      //  button = findViewById(R.id.button2)
+
+        //val db = FirebaseFirestore.getInstance()
+
+        _buttonLogin.setOnClickListener{
+         //   xd.ReadDataFromFile()
+/*
             val user: MutableMap<String, Any> = HashMap()
             user["first"] = "Ada"
             user["last"] = "Lovelace"
+            user["ula"] = "xd"
             user["born"] = 1815
 
             db.collection("users").add(user).addOnSuccessListener {
                 print("sea")
             }
 
-
+*/
         }
     }
 }
