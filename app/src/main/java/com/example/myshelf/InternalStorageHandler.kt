@@ -1,7 +1,6 @@
 package com.example.myshelf
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.widget.EditText
 import java.io.*
 
@@ -10,34 +9,23 @@ import java.io.*
  * @author enesdurmus
  */
 
-class InternalStorageHandler(debeme : EditText) : AppCompatActivity() {
+class InternalStorageHandler(debeme: EditText){
 
-    private lateinit var fos : FileOutputStream
-    private lateinit var fis : FileInputStream
-    private val texttt : EditText
-
-    private var sea : String = "aloooooooooooooooooooooo"
+    private val _texttt : EditText
 
     init {
-        texttt = debeme
+        _texttt = debeme
     }
 
-    public fun WriteDataToFile(data : ByteArray){
-        print("aloooo")
-        /*try {
-            fos = openFileOutput("example.txt", Context.MODE_PRIVATE)
+    public fun WriteDataToFile(data : ByteArray, fos : FileOutputStream){
+        try {
             fos.write(data)
-        }catch (e : FileNotFoundException){
-            print("file not found.")
+        }catch (e: Exception){
+            _texttt.setText("hata")
         }
-        catch (e : IOException){
-            print("io exception.")
-        }
-*/
     }
 
-    public fun ReadDataFromFile(){
-        fis = openFileInput("example.txt")
+    public fun ReadDataFromFile(fis: FileInputStream){
         var isr : InputStreamReader = InputStreamReader(fis)
         val br: BufferedReader = BufferedReader(isr)
         val sb : StringBuilder = StringBuilder()
@@ -47,6 +35,6 @@ class InternalStorageHandler(debeme : EditText) : AppCompatActivity() {
             sb.append(text)
         }
 
-        //texttt.setText(sb.toString()).toString()
+        _texttt.setText(sb.toString()).toString()
     }
 }

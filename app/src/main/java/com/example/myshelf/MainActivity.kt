@@ -1,11 +1,15 @@
 package com.example.myshelf
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioButton
-import com.google.firebase.firestore.FirebaseFirestore
+import java.io.BufferedReader
+import java.io.FileInputStream
+import java.io.FileOutputStream
+import java.io.InputStreamReader
 
 /**
  *
@@ -37,7 +41,10 @@ class MainActivity : AppCompatActivity() {
         _internalStorageHandler = InternalStorageHandler(_textUserName)
 
         _radioButtonRememberMe.setOnClickListener{
-            _internalStorageHandler.WriteDataToFile("seaaaaa".toByteArray())
+            var fos : FileOutputStream? = openFileOutput("example.txt", Context.MODE_APPEND)
+            if (fos != null) {
+                _internalStorageHandler.WriteDataToFile("seaaaaa".toByteArray(), fos)
+            }
         }
 
 
@@ -47,6 +54,11 @@ class MainActivity : AppCompatActivity() {
         //val db = FirebaseFirestore.getInstance()
 
         _buttonLogin.setOnClickListener{
+            var fis : FileInputStream? = openFileInput("example.txt")
+            if (fis != null) {
+                _internalStorageHandler.ReadDataFromFile(fis)
+            }
+        //_internalStorageHandler.ReadDataFromFile()
          //   xd.ReadDataFromFile()
 /*
             val user: MutableMap<String, Any> = HashMap()

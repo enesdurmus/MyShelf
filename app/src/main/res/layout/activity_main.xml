@@ -42,7 +42,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonRememberMe"
+        app:layout_constraintTop_toBottomOf="@+id/radioButtonRememberMe"
         app:layout_constraintVertical_bias="0.176" />
 
     <Button
