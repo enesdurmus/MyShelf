@@ -7,6 +7,8 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioButton
+import com.google.firebase.firestore.FirebaseFirestore
+import org.w3c.dom.UserDataHandler
 import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.lang.Exception
@@ -36,27 +38,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        _internalStorageHandler = InternalStorageHandler()
+
         _radioButtonRememberMe = findViewById(R.id.radioButtonRememberMe)
         _buttonLogin = findViewById(R.id.buttonLogin)
         _textUserName = findViewById(R.id.textUserName)
 
-        _internalStorageHandler = InternalStorageHandler(_textUserName)
-
+        val db = FirebaseFirestore.getInstance()
         _radioButtonRememberMe.setOnClickListener{
-            GetUserDataInternal()
-        }
 
-
-
-      //  button = findViewById(R.id.button2)
-
-        //val db = FirebaseFirestore.getInstance()
-
-        _buttonLogin.setOnClickListener{
-            UpdateUserDataInternal()
-        //_internalStorageHandler.ReadDataFromFile()
-         //   xd.ReadDataFromFile()
-/*
             val user: MutableMap<String, Any> = HashMap()
             user["first"] = "Ada"
             user["last"] = "Lovelace"
@@ -64,42 +54,13 @@ class MainActivity : AppCompatActivity() {
             user["born"] = 1815
 
             db.collection("users").add(user).addOnSuccessListener {
-                print("sea")
+                Log.d("sea","sea")
             }
-
-*/
+            _internalStorageHandler.WriteDataToFile(UserDataFileName, user)
         }
-    }
 
-    fun GetUserDataInternal(){
-        ReadData(UserDataFileName)
-    }
-
-    fun UpdateUserDataInternal(){
-        val user: MutableMap<String, Any> = HashMap()
-        user["first"] = "Ada"
-        user["last"] = "Lovelace"
-        user["ula"] = "xd"
-        user["born"] = 1815
-
-        SaveData(UserDataFileName, user)
-    }
-
-    fun SaveData(fileName : String, data : Any){
-        try{
-            var fos : FileOutputStream = openFileOutput(fileName, Context.MODE_PRIVATE)
-            _internalStorageHandler.WriteDataToFile(data, fos)
-        }catch (e : Exception){
-            Log.d("Exception1", e.message.toString())
-        }
-    }
-
-    fun ReadData(fileName : String){
-        try{
-            var fis : FileInputStream = openFileInput(fileName)
-            val mapInFile : HashMap<String, Any>? = _internalStorageHandler.ReadDataFromFile(fis)
-        }catch (e : Exception){
-            Log.d("Exception2", e.message.toString())
+        _buttonLogin.setOnClickListener{
+            _internalStorageHandler.ReadDataFromFile(UserDataFileName)
         }
     }
 }

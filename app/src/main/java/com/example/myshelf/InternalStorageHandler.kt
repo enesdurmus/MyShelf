@@ -1,7 +1,8 @@
 package com.example.myshelf
 
+import android.content.Context
 import android.util.Log
-import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
 import java.io.*
 
 /**
@@ -9,33 +10,29 @@ import java.io.*
  * @author enesdurmus
  */
 
-class InternalStorageHandler(debeme: EditText){
+class InternalStorageHandler() : AppCompatActivity() {
 
-    private val _texttt : EditText
-
-    init {
-        _texttt = debeme
-    }
-
-    public fun WriteDataToFile(data: Any, fos: FileOutputStream){
+    fun WriteDataToFile(fileName : String, data: Any){
         try {
+            var fos = AppClass.context?.openFileOutput(fileName, Context.MODE_PRIVATE)
             var ous = ObjectOutputStream(fos)
             ous.writeObject(data)
             ous.close()
-            fos.close()
+            fos?.close()
         }catch (e: Exception){
             Log.d("Exception3", e.message.toString())
         }
     }
 
-    public fun ReadDataFromFile(fis: FileInputStream) : HashMap<String, Any>? {
+    fun ReadDataFromFile(fileName: String) : HashMap<String, Any>? {
 
         try {
+            var fis = AppClass.context?.openFileInput(fileName)
             var ois = ObjectInputStream(fis)
             val mapInFile = ois.readObject() as HashMap<String, Any>
 
             ois.close()
-            fis.close()
+            fis?.close()
             return mapInFile
         }catch (e: Exception){
             Log.d("Exception4", e.message.toString())
