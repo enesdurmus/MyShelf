@@ -1,22 +1,12 @@
 package com.example.myshelf
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioButton
-import android.widget.RadioGroup
 import com.google.firebase.firestore.FirebaseFirestore
-import org.w3c.dom.UserDataHandler
-import java.io.FileInputStream
-import java.io.FileOutputStream
-import java.lang.Exception
-import android.widget.Toast
-
-
 
 
 /**
@@ -39,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var _radioButtonRememberMe : RadioButton
 
-    lateinit var _internalStorageHandler : InternalStorageHandler
+    lateinit var _storageHandler : StorageHandler
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,32 +37,32 @@ class MainActivity : AppCompatActivity() {
 
         _user = User("enes", "3752590ev")
 
-        _internalStorageHandler = InternalStorageHandler()
+        _storageHandler = StorageHandler("sea")
 
         _radioButtonRememberMe = findViewById(R.id.radioButtonRememberMe)
         _buttonLogin = findViewById(R.id.buttonLogin)
+        _buttonCreateAccount = findViewById(R.id.buttonCreateAnAccount)
         _textUserName = findViewById(R.id.textUserName)
 
-        val db = FirebaseFirestore.getInstance()
+        _buttonCreateAccount.setOnClickListener{
+
+        }
 
         _radioButtonRememberMe.setOnClickListener{
 
             ToggleRememberMeButton()
 
             val user: MutableMap<String, Any> = HashMap()
-            user["first"] = "Ada"
+            user["userName"] = "Enes"
             user["last"] = "Lovelace"
             user["ula"] = "xd"
             user["born"] = 1815
 
-            db.collection("users").add(user).addOnSuccessListener {
-                Log.d("sea","sea")
-            }
-            _internalStorageHandler.WriteDataToFile(UserDataFileName, user)
+            _storageHandler.WriteDataToFile(UserDataFileName, user)
         }
 
         _buttonLogin.setOnClickListener{
-            UserData = _internalStorageHandler.ReadDataFromFile(UserDataFileName)
+            UserData = _storageHandler.ReadDataFromFile(UserDataFileName)
             _textUserName.setText(UserData?.getValue("first").toString())
         }
     }
