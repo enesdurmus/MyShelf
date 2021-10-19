@@ -1,5 +1,6 @@
 package com.example.myshelf
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -14,22 +15,24 @@ import com.google.firebase.firestore.FirebaseFirestore
  * @author enesdurmus
  */
 
+const val CreateAccountActivityKey = "com.example.MyShelf.CreateAccount"
+const val UserDataFileName : String = "UserData"
+
 class MainActivity : AppCompatActivity() {
 
-    val UserDataFileName : String = "UserData"
-    var UserData : HashMap<String, Any>? = null
+    private var UserData : HashMap<String, Any>? = null
 
-    lateinit var _user : User
-    lateinit var _textUserName : EditText
-    lateinit var _textPassword : EditText
+    private lateinit var _user : User
+    private lateinit var _textUserName : EditText
+    private lateinit var _textPassword : EditText
 
-    lateinit var _buttonLogin : Button
-    lateinit var _buttonCreateAccount : Button
-    lateinit var _buttonForgotPassword : Button
+    private lateinit var _buttonLogin : Button
+    private lateinit var _buttonCreateAccount : Button
+    private lateinit var _buttonForgotPassword : Button
 
-    lateinit var _radioButtonRememberMe : RadioButton
+    private lateinit var _radioButtonRememberMe : RadioButton
 
-    lateinit var _storageHandler : StorageHandler
+    private lateinit var _storageHandler : StorageHandler
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,9 +47,7 @@ class MainActivity : AppCompatActivity() {
         _buttonCreateAccount = findViewById(R.id.buttonCreateAnAccount)
         _textUserName = findViewById(R.id.textUserName)
 
-        _buttonCreateAccount.setOnClickListener{
-
-        }
+        HandleCreateAccountButton()
 
         _radioButtonRememberMe.setOnClickListener{
 
@@ -70,5 +71,15 @@ class MainActivity : AppCompatActivity() {
     fun ToggleRememberMeButton(){
         _user.ToggleIsRememberMeChecked()
         _radioButtonRememberMe.isChecked = _user.GetIsRememberMeChecked()
+    }
+
+    fun HandleCreateAccountButton() {
+        _buttonCreateAccount.setOnClickListener{
+            val message = "selam"
+            val intent = Intent(this, CreateAccountActivity::class.java).apply {
+                putExtra(CreateAccountActivityKey, message)
+            }
+            startActivity(intent)
+        }
     }
 }
