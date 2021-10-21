@@ -18,7 +18,7 @@
         android:layout_marginTop="60dp"
         android:textSize="50dp"/>
 
-    <TextView
+    <EditText
         android:id="@+id/textUserNameCa"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
@@ -27,16 +27,16 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp" />
 
-    <TextView
+    <EditText
         android:id="@+id/textFullNameCa"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textUserNameCa"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:hint="Full name"/>
+        android:hint="Full name" />
 
-    <TextView
+    <EditText
         android:id="@+id/textEmailCa"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
@@ -72,7 +72,7 @@
         android:id="@+id/buttonCreateAnAccountCa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign Up"
+        android:text="Create An Account"
         android:layout_below="@+id/editTextConfirmPasswordCa"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
