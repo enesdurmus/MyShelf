@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        _user = User("enes", "3752590ev")
+        _user = User("enes", "3752590ev", "as", "s")
 
         _storageHandler = StorageHandler("sea")
 
@@ -63,8 +63,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         _buttonLogin.setOnClickListener{
-            UserData = _storageHandler.ReadDataFromFile(UserDataFileName)
-            _textUserName.setText(UserData?.getValue("first").toString())
+            _storageHandler.ReadDataFromFirebase()
+
+            //UserData = _storageHandler.ReadDataFromFile(UserDataFileName)
+          //  _textUserName.setText(UserData?.getValue("first").toString())
         }
     }
 

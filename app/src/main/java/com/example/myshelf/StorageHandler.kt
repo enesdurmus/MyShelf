@@ -12,6 +12,7 @@ import com.google.firebase.firestore.DocumentReference
 
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 
 
 /**
@@ -56,8 +57,19 @@ class StorageHandler(firebaseDocumentId : String) : AppCompatActivity() {
         }
     }
 
-    fun ReadDataFromFirebase(){
-
+    fun ReadDataFromFirebase() {
+        val docRef = db.collection("users").document("r93pe2oHmRSi58hH7EOS")
+        docRef.get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    Log.d("1", "DocumentSnapshot data: ${document.data}")
+                } else {
+                    Log.d("2", "No such document")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d("3", "get failed with ", exception)
+            }
     }
 
     fun WriteDataToFirebase(user : HashMap<String, Any>){
