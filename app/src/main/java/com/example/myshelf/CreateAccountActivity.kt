@@ -11,7 +11,7 @@ class CreateAccountActivity : AppCompatActivity() {
 
         val message = intent.getStringExtra(CreateAccountActivityKey)
 
-        val textView = findViewById<TextView>(R.id.textView).apply {
+        val textView = findViewById<TextView>(R.id.textUserNameCa).apply {
             text = message
         }
     }
