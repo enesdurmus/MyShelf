@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity() {
         _buttonLogin = findViewById(R.id.buttonLogin)
         _buttonCreateAccount = findViewById(R.id.buttonCreateAnAccount)
         _textUserName = findViewById(R.id.textUserName)
+        _textPassword = findViewById(R.id.textPassword)
 
         HandleCreateAccountButton()
 
@@ -65,7 +66,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         _buttonLogin.setOnClickListener {
-            HandleLoginButton()
+            StorageHandler.ReadDataFromFirebase(_textUserName.text.toString(), ::OnUserDataRead)
 
             //UserData = _storageHandler.ReadDataFromFile(UserDataFileName)
             //  _textUserName.setText(UserData?.getValue("first").toString())
@@ -75,10 +76,6 @@ class MainActivity : AppCompatActivity() {
     fun ToggleRememberMeButton() {
         _user.ToggleIsRememberMeChecked()
         _radioButtonRememberMe.isChecked = _user.GetIsRememberMeChecked()
-    }
-
-    fun HandleLoginButton() {
-        StorageHandler.ReadDataFromFirebase(_textUserName.text.toString(), ::OnUserDataRead)
     }
 
     fun HandleCreateAccountButton() {
@@ -91,13 +88,24 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun OnUserDataRead(state: LoginCallState) {
+    fun OnUserDataRead(state: LoginCallState, password: String?) {
         if (state == LoginCallState.Found) {
-            Log.d("s", "Success")
+            if (password != null) {
+                CheckPassword(password)
+            }
         } else if (state == LoginCallState.NotFound) {
-            Toast.makeText(this, "UserNotFound.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "User Not Found.", Toast.LENGTH_SHORT).show()
         } else if (state == LoginCallState.Error) {
             Toast.makeText(this, "Error.", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    fun CheckPassword(password: String): Boolean {
+        if (_textPassword.text.toString() == password) {
+            Toast.makeText(this, "Gir", Toast.LENGTH_SHORT).show()
+            return true
+        }
+        Toast.makeText(this, "Wrong Password", Toast.LENGTH_SHORT).show()
+        return false
     }
 }

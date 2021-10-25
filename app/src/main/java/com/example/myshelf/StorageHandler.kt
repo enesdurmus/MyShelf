@@ -11,7 +11,7 @@ import com.google.firebase.firestore.DocumentReference
 
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlin.reflect.KFunction1
+import kotlin.reflect.KFunction2
 
 
 /**
@@ -67,20 +67,23 @@ class StorageHandler(firebaseDocumentId: String) : AppCompatActivity() {
                 }
         }
 
-        fun ReadDataFromFirebase(userName: String, OnUserDataRead: KFunction1<LoginCallState, Unit>)
+        fun ReadDataFromFirebase(userName: String, OnUserDataRead: KFunction2<LoginCallState, String?, Unit>)
         {
             db.collection("users")
                 .whereEqualTo("UserName", userName)
                 .get()
                 .addOnSuccessListener { documents ->
                     if (!documents.isEmpty) {
-                        OnUserDataRead(LoginCallState.Found)
+                        for (document in documents){
+                            OnUserDataRead(LoginCallState.Found, document.data.getValue("Password").toString())
+                        }
+
                     } else {
-                        OnUserDataRead(LoginCallState.NotFound)
+                        OnUserDataRead(LoginCallState.NotFound, null)
                     }
                 }
                 .addOnFailureListener { exception ->
-                    OnUserDataRead(LoginCallState.Error)
+                    OnUserDataRead(LoginCallState.Error, null)
                 }
         }
 
