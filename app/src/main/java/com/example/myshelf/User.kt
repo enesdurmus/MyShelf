@@ -5,14 +5,14 @@ package com.example.myshelf
  * @author enesdurmus
  */
 
-class User(userName : String, fullName : String, eMail : String,password : String) {
+class User(userName: String, fullName: String, eMail: String, password: String) {
 
-    private var _userName : String
-    private var _fullName : String
-    private var _eMail : String
-    private var _password : String
-    private var _isRememberMeChecked : Boolean
-    private var _firebaseDocumentId : String
+    private var _userName: String
+    private var _fullName: String
+    private var _eMail: String
+    private var _password: String
+    private var _isRememberMeChecked: Boolean
+    private var _firebaseDocumentId: String
 
     init {
         _userName = userName
@@ -23,20 +23,20 @@ class User(userName : String, fullName : String, eMail : String,password : Strin
         _firebaseDocumentId = ""
     }
 
-    fun GetHashMapOfProperties() : HashMap<String, Any>{
-        val propsHashMap: HashMap<String, Any> = HashMap()
-        propsHashMap["UserName"] = _userName
-        propsHashMap["FullName"] = _fullName
-        propsHashMap["E-mail"] = _eMail
-        propsHashMap["Password"] = _password
-        return propsHashMap
+    fun GetHashMapOfProperties(): HashMap<String, Any> {
+        val propertiesHashMap: HashMap<String, Any> = HashMap()
+        propertiesHashMap["UserName"] = _userName
+        propertiesHashMap["FullName"] = _fullName
+        propertiesHashMap["E-mail"] = _eMail
+        propertiesHashMap["Password"] = _password
+        return propertiesHashMap
     }
 
-    fun GetIsRememberMeChecked() : Boolean{
+    fun GetIsRememberMeChecked(): Boolean {
         return _isRememberMeChecked
     }
 
-    fun ToggleIsRememberMeChecked(){
+    fun ToggleIsRememberMeChecked() {
         _isRememberMeChecked = !_isRememberMeChecked
     }
 }
