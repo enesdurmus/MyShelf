@@ -53,17 +53,17 @@ class MainActivity : AppCompatActivity() {
 
             ToggleRememberMeButton()
 
-            val user: MutableMap<String, Any> = HashMap()
+          /*  val user: MutableMap<String, Any> = HashMap()
             user["userName"] = "Enes"
             user["last"] = "Lovelace"
             user["ula"] = "xd"
             user["born"] = 1815
 
-            _storageHandler.WriteDataToFile(UserDataFileName, user)
+            _storageHandler.WriteDataToFile(UserDataFileName, user)*/
         }
 
         _buttonLogin.setOnClickListener{
-            _storageHandler.ReadDataFromFirebase()
+            HandleLoginButton()
 
             //UserData = _storageHandler.ReadDataFromFile(UserDataFileName)
           //  _textUserName.setText(UserData?.getValue("first").toString())
@@ -75,6 +75,10 @@ class MainActivity : AppCompatActivity() {
         _radioButtonRememberMe.isChecked = _user.GetIsRememberMeChecked()
     }
 
+    fun HandleLoginButton(){
+        _storageHandler.ReadDataFromFirebase(_textUserName.text.toString())
+    }
+
     fun HandleCreateAccountButton() {
         _buttonCreateAccount.setOnClickListener{
             val message = "selam"
@@ -82,6 +86,12 @@ class MainActivity : AppCompatActivity() {
                 putExtra(CreateAccountActivityKey, message)
             }
             startActivity(intent)
+        }
+    }
+
+    companion object {
+        fun OnUserReadSuccesfull(){
+            Log.d("8", "sea")
         }
     }
 }

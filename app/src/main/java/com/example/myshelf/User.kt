@@ -23,8 +23,13 @@ class User(userName : String, fullName : String, eMail : String,password : Strin
         _firebaseDocumentId = ""
     }
 
-    fun GetHashMapOfProperties(){
-
+    fun GetHashMapOfProperties() : HashMap<String, Any>{
+        val propsHashMap: HashMap<String, Any> = HashMap()
+        propsHashMap["UserName"] = _userName
+        propsHashMap["FullName"] = _fullName
+        propsHashMap["E-mail"] = _eMail
+        propsHashMap["Password"] = _password
+        return propsHashMap
     }
 
     fun GetIsRememberMeChecked() : Boolean{

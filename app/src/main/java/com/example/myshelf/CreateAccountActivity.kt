@@ -31,13 +31,12 @@ class CreateAccountActivity : AppCompatActivity() {
         _storageHandler = StorageHandler("sea")
 
         _buttonCreateAccount.setOnClickListener{
-            val user: HashMap<String, Any> = HashMap()
-            user["UserName"] = _textUserName.text.toString()
-            user["FullName"] = _textFullName.text.toString()
-            user["E-mail"] = _eMail.text.toString()
-            user["Password"] = _password.text.toString()
+            val user : User = User(_textUserName.text.toString(),
+                                   _textFullName.text.toString(),
+                                   _eMail.text.toString(),
+                                   _password.text.toString())
 
-            _storageHandler.WriteDataToFirebase(user)
+            _storageHandler.WriteDataToFirebase(user.GetHashMapOfProperties())
         }
     }
 }

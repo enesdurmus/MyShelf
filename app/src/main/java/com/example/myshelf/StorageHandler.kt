@@ -72,6 +72,21 @@ class StorageHandler(firebaseDocumentId : String) : AppCompatActivity() {
             }
     }
 
+    fun ReadDataFromFirebase(userName : String){
+        db.collection("users")
+            .whereEqualTo("UserName", userName)
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    Log.d("1", "${document.id} => ${document.data}")
+                    MainActivity.OnUserReadSuccesfull()
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w("2", "Error getting documents: ", exception)
+            }
+    }
+
     fun WriteDataToFirebase(user : HashMap<String, Any>){
         db.collection("users")
             .add(user)
