@@ -1,11 +1,13 @@
 package com.example.myshelf
 
+import java.io.Serializable
+
 /**
  *
  * @author enesdurmus
  */
 
-class User(userName: String, fullName: String, eMail: String, password: String) {
+class User(userName: String, fullName: String, eMail: String, password: String) : Serializable{
 
     private var _userName: String
     private var _fullName: String
@@ -13,6 +15,7 @@ class User(userName: String, fullName: String, eMail: String, password: String) 
     private var _password: String
     private var _isRememberMeChecked: Boolean
     private var _firebaseDocumentId: String
+    private lateinit var _movies : HashMap<String, String>
 
     init {
         _userName = userName
@@ -39,5 +42,22 @@ class User(userName: String, fullName: String, eMail: String, password: String) 
 
     fun ToggleIsRememberMeChecked() {
         _isRememberMeChecked = !_isRememberMeChecked
+    }
+
+    fun Getsdsa() : String{
+        return _fullName
+    }
+
+    companion object{
+        fun CreateUserWithData(data : Map<String, Any>) : User{
+            val user = User(
+                data.getValue("UserName") as String,
+                data.getValue("FullName") as String,
+                data.getValue("E-mail") as String,
+                data.getValue("Password") as String
+            )
+
+            return user
+        }
     }
 }

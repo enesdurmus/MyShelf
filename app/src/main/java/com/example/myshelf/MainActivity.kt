@@ -3,7 +3,6 @@ package com.example.myshelf
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioButton
@@ -25,9 +24,6 @@ const val UserDataFileName: String = "UserData"
 
 class MainActivity : AppCompatActivity() {
 
-    private var userData: Map<String, Any>? = null
-
-    private lateinit var _user: User
     private lateinit var _textUserName: EditText
     private lateinit var _textPassword: EditText
 
@@ -65,14 +61,16 @@ class MainActivity : AppCompatActivity() {
           _storageHandler.WriteDataToFile(UserDataFileName, user)*/
     }
 
-    fun Init(){
-        if(CheckIsRememberMeSelected() == false){
-            userData = StorageHandler.ReadDataFromFile(UserDataFileName)
-            LoginAccount()
+    fun Init() {
+        if (CheckIsRememberMeSelected() == false) {
+            var userData: Map<String, Any>? = StorageHandler.ReadDataFromFile(UserDataFileName)
+            if (userData != null) {
+                LoginAccount(User.CreateUserWithData(userData))
+            }
         }
     }
 
-    fun CheckIsRememberMeSelected() : Boolean? {
+    fun CheckIsRememberMeSelected(): Boolean? {
         return StorageHandler.ReadDataFromFile(UserDataFileName)?.isEmpty()
     }
 
@@ -106,11 +104,11 @@ class MainActivity : AppCompatActivity() {
     fun OnUserDataRead(state: LoginCallState, data: Map<String, Any>?) {
         if (state == LoginCallState.Found) {
             if (data != null) {
-                if(CheckPassword(data.getValue("Password").toString())){
-                    if(_isRadioButtonChecked){
+                if (CheckPassword(data.getValue("Password").toString())) {
+                    if (_isRadioButtonChecked) {
                         StorageHandler.WriteDataToFile(UserDataFileName, data)
                     }
-                    LoginAccount()
+                    LoginAccount(User.CreateUserWithData(data))
                 }
             }
         } else if (state == LoginCallState.NotFound) {
@@ -120,10 +118,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun LoginAccount(){
-        val message = "selam"
+    fun LoginAccount(user: User) {
         val intent = Intent(this, MainMenuActivity::class.java).apply {
-            putExtra(MainMenuActivityKey, message)
+            putExtra(MainMenuActivityKey, user)
         }
         startActivity(intent)
     }
