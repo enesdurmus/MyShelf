@@ -24,6 +24,14 @@ class StorageHandler(firebaseDocumentId: String) : AppCompatActivity() {
     companion object {
         val db = FirebaseFirestore.getInstance()
 
+        fun ClearFile(fileName: String){
+            try {
+                AppClass.context?.deleteFile(fileName)
+            } catch (e: Exception) {
+                Log.d("Exception5", e.message.toString())
+            }
+        }
+
         fun WriteDataToFile(fileName: String, data: Any) {
             try {
                 var fos = AppClass.context?.openFileOutput(fileName, Context.MODE_PRIVATE)
@@ -36,12 +44,12 @@ class StorageHandler(firebaseDocumentId: String) : AppCompatActivity() {
             }
         }
 
-        fun ReadDataFromFile(fileName: String): HashMap<String, Any>? {
+        fun ReadDataFromFile(fileName: String): Map<String, Any>? {
 
             try {
                 var fis = AppClass.context?.openFileInput(fileName)
                 var ois = ObjectInputStream(fis)
-                val mapInFile = ois.readObject() as HashMap<String, Any>
+                val mapInFile = ois.readObject() as Map<String, Any>
 
                 ois.close()
                 fis?.close()
@@ -67,7 +75,7 @@ class StorageHandler(firebaseDocumentId: String) : AppCompatActivity() {
                 }
         }
 
-        fun ReadDataFromFirebase(userName: String, OnUserDataRead: KFunction2<LoginCallState, String?, Unit>)
+        fun ReadDataFromFirebase(userName: String, OnUserDataRead: KFunction2<LoginCallState, Map<String, Any>?, Unit>)
         {
             db.collection("users")
                 .whereEqualTo("UserName", userName)
@@ -75,7 +83,7 @@ class StorageHandler(firebaseDocumentId: String) : AppCompatActivity() {
                 .addOnSuccessListener { documents ->
                     if (!documents.isEmpty) {
                         for (document in documents){
-                            OnUserDataRead(LoginCallState.Found, document.data.getValue("Password").toString())
+                            OnUserDataRead(LoginCallState.Found, document.data)
                         }
 
                     } else {

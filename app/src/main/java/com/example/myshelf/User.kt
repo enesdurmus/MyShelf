@@ -24,12 +24,13 @@ class User(userName: String, fullName: String, eMail: String, password: String) 
     }
 
     fun GetHashMapOfProperties(): HashMap<String, Any> {
-        val propertiesHashMap: HashMap<String, Any> = HashMap()
-        propertiesHashMap["UserName"] = _userName
-        propertiesHashMap["FullName"] = _fullName
-        propertiesHashMap["E-mail"] = _eMail
-        propertiesHashMap["Password"] = _password
-        return propertiesHashMap
+        val propertiesMap: HashMap<String, Any> = HashMap()
+        propertiesMap["UserName"] = _userName
+        propertiesMap["FullName"] = _fullName
+        propertiesMap["E-mail"] = _eMail
+        propertiesMap["Password"] = _password
+       // propertiesMap["IsRememberMeChecked"] = _isRememberMeChecked
+        return propertiesMap
     }
 
     fun GetIsRememberMeChecked(): Boolean {

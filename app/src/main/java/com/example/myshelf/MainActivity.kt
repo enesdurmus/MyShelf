@@ -15,16 +15,17 @@ import android.widget.Toast
  * @author enesdurmus
  */
 
-const val CreateAccountActivityKey = "com.example.MyShelf.CreateAccount"
-const val UserDataFileName: String = "UserData"
-
 enum class LoginCallState {
     Found, NotFound, Error
 }
 
+const val CreateAccountActivityKey = "com.example.MyShelf.CreateAccount"
+const val MainMenuActivityKey = "com.example.MyShelf.MainMenu"
+const val UserDataFileName: String = "UserData"
+
 class MainActivity : AppCompatActivity() {
 
-    private var UserData: HashMap<String, Any>? = null
+    private var userData: Map<String, Any>? = null
 
     private lateinit var _user: User
     private lateinit var _textUserName: EditText
@@ -36,13 +37,14 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var _radioButtonRememberMe: RadioButton
 
+    private var _isRadioButtonChecked = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        _user = User("enes", "3752590ev", "as", "s")
-
+        Init()
 
         _radioButtonRememberMe = findViewById(R.id.radioButtonRememberMe)
         _buttonLogin = findViewById(R.id.buttonLogin)
@@ -51,31 +53,39 @@ class MainActivity : AppCompatActivity() {
         _textPassword = findViewById(R.id.textPassword)
 
         HandleCreateAccountButton()
+        HandleLoginButton()
+        HandleRememberMeRadioButton()
 
-        _radioButtonRememberMe.setOnClickListener {
+        /*  val user: MutableMap<String, Any> = HashMap()
+          user["userName"] = "Enes"
+          user["last"] = "Lovelace"
+          user["ula"] = "xd"
+          user["born"] = 1815
 
-            ToggleRememberMeButton()
+          _storageHandler.WriteDataToFile(UserDataFileName, user)*/
+    }
 
-            /*  val user: MutableMap<String, Any> = HashMap()
-              user["userName"] = "Enes"
-              user["last"] = "Lovelace"
-              user["ula"] = "xd"
-              user["born"] = 1815
-
-              _storageHandler.WriteDataToFile(UserDataFileName, user)*/
-        }
-
-        _buttonLogin.setOnClickListener {
-            StorageHandler.ReadDataFromFirebase(_textUserName.text.toString(), ::OnUserDataRead)
-
-            //UserData = _storageHandler.ReadDataFromFile(UserDataFileName)
-            //  _textUserName.setText(UserData?.getValue("first").toString())
+    fun Init(){
+        if(CheckIsRememberMeSelected() == false){
+            userData = StorageHandler.ReadDataFromFile(UserDataFileName)
+            LoginAccount()
         }
     }
 
-    fun ToggleRememberMeButton() {
-        _user.ToggleIsRememberMeChecked()
-        _radioButtonRememberMe.isChecked = _user.GetIsRememberMeChecked()
+    fun CheckIsRememberMeSelected() : Boolean? {
+        return StorageHandler.ReadDataFromFile(UserDataFileName)?.isEmpty()
+    }
+
+    fun HandleLoginButton() {
+        _buttonLogin.setOnClickListener {
+            StorageHandler.ReadDataFromFirebase(_textUserName.text.toString(), ::OnUserDataRead)
+        }
+    }
+
+    fun HandleRememberMeRadioButton() {
+        _radioButtonRememberMe.setOnClickListener {
+            ToggleRememberMeButton()
+        }
     }
 
     fun HandleCreateAccountButton() {
@@ -88,16 +98,34 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun OnUserDataRead(state: LoginCallState, password: String?) {
+    fun ToggleRememberMeButton() {
+        _radioButtonRememberMe.isChecked = !_isRadioButtonChecked
+        _isRadioButtonChecked = !_isRadioButtonChecked
+    }
+
+    fun OnUserDataRead(state: LoginCallState, data: Map<String, Any>?) {
         if (state == LoginCallState.Found) {
-            if (password != null) {
-                CheckPassword(password)
+            if (data != null) {
+                if(CheckPassword(data.getValue("Password").toString())){
+                    if(_isRadioButtonChecked){
+                        StorageHandler.WriteDataToFile(UserDataFileName, data)
+                    }
+                    LoginAccount()
+                }
             }
         } else if (state == LoginCallState.NotFound) {
             Toast.makeText(this, "User Not Found.", Toast.LENGTH_SHORT).show()
         } else if (state == LoginCallState.Error) {
             Toast.makeText(this, "Error.", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    fun LoginAccount(){
+        val message = "selam"
+        val intent = Intent(this, MainMenuActivity::class.java).apply {
+            putExtra(MainMenuActivityKey, message)
+        }
+        startActivity(intent)
     }
 
     fun CheckPassword(password: String): Boolean {
