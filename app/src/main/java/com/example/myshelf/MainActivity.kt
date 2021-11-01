@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.hide()
         setContentView(R.layout.activity_main)
 
         Init()
@@ -119,7 +120,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun LoginAccount(user: User) {
-        val intent = Intent(this, MainMenuActivity::class.java).apply {
+        val intent = Intent(this, HomePageActivity::class.java).apply {
             putExtra(MainMenuActivityKey, user)
         }
         startActivity(intent)

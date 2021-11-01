@@ -7,23 +7,32 @@ import java.io.Serializable
  * @author enesdurmus
  */
 
-class User(userName: String, fullName: String, eMail: String, password: String) : Serializable{
+class User(userName: String, fullName: String, eMail: String, password: String, movies: HashMap<String, Any>?) : Serializable {
 
-    private var _userName: String
-    private var _fullName: String
-    private var _eMail: String
-    private var _password: String
-    private var _isRememberMeChecked: Boolean
-    private var _firebaseDocumentId: String
-    private lateinit var _movies : HashMap<String, String>
+    internal var _userName: String
+        get() = field
+    internal var _fullName: String
+        get() = field
+    internal var _eMail: String
+        get() = field
+    internal var _password: String
+        get() = field
+    internal var _firebaseDocumentId: String
+        get() = field
+    internal var _movies: HashMap<String, Any>
+        get() = field
 
     init {
         _userName = userName
         _fullName = fullName
         _eMail = eMail
         _password = password
-        _isRememberMeChecked = false
         _firebaseDocumentId = ""
+        if (movies != null) {
+            _movies = movies
+        }else{
+            _movies = HashMap()
+        }
     }
 
     fun GetHashMapOfProperties(): HashMap<String, Any> {
@@ -32,29 +41,18 @@ class User(userName: String, fullName: String, eMail: String, password: String) 
         propertiesMap["FullName"] = _fullName
         propertiesMap["E-mail"] = _eMail
         propertiesMap["Password"] = _password
-       // propertiesMap["IsRememberMeChecked"] = _isRememberMeChecked
+        propertiesMap["Movies"] = _movies
         return propertiesMap
     }
 
-    fun GetIsRememberMeChecked(): Boolean {
-        return _isRememberMeChecked
-    }
-
-    fun ToggleIsRememberMeChecked() {
-        _isRememberMeChecked = !_isRememberMeChecked
-    }
-
-    fun Getsdsa() : String{
-        return _fullName
-    }
-
-    companion object{
-        fun CreateUserWithData(data : Map<String, Any>) : User{
+    companion object {
+        fun CreateUserWithData(data: Map<String, Any>): User {
             val user = User(
                 data.getValue("UserName") as String,
                 data.getValue("FullName") as String,
                 data.getValue("E-mail") as String,
-                data.getValue("Password") as String
+                data.getValue("Password") as String,
+                data.getValue("Movies") as HashMap<String, Any>
             )
 
             return user

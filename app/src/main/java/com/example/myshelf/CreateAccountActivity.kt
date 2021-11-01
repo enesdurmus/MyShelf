@@ -38,7 +38,8 @@ class CreateAccountActivity : AppCompatActivity() {
                 _textUserName.text.toString(),
                 _textFullName.text.toString(),
                 _eMail.text.toString(),
-                _password.text.toString()
+                _password.text.toString(),
+                null
             )
 
             StorageHandler.WriteDataToFirebase(user.GetHashMapOfProperties())

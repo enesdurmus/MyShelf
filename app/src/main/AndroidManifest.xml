@@ -15,8 +15,8 @@
             android:exported="false"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".MainMenuActivity"
-            android:exported="false"/>
+            android:name=".HomePageActivity"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
