@@ -2,7 +2,7 @@
     <string name="app_name">MyShelf</string>
     <string name="login">LOGIN</string>
     <string name="remember_me">Remember Me!</string>
-    
+
     <string-array name="programming_languages">
         <item>C++</item>
         <item>C#</item>
@@ -11,7 +11,7 @@
         <item>2</item>
         <item>3</item>
     </string-array>
-    
+
     <string-array name="description">
         <item>C++</item>
         <item>C#</item>
@@ -20,4 +20,6 @@
         <item>2</item>
         <item>3</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
