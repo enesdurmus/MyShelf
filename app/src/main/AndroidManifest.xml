@@ -17,7 +17,7 @@
             android:exported="false"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".DashBoardActivity"
+            android:name=".MainContainerActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

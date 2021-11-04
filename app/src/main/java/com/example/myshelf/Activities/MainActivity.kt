@@ -120,7 +120,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun LoginAccount(user: User) {
-        val intent = Intent(this, DashBoardActivity::class.java).apply {
+        val intent = Intent(this, MainContainerActivity::class.java).apply {
             putExtra(MainMenuActivityKey, user)
         }
         startActivity(intent)

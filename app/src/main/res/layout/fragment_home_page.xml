@@ -3,35 +3,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomePageFragment"
-    android:background="@drawable/gradient">
+    android:background="@drawable/gradient"
+    tools:context=".HomePageFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="22dp"
-            android:textSize="30dp"
-            android:textColor="@color/white"
+            android:layout_marginBottom="20dp"
             android:text="Welcome To Your Shelf"
-            android:layout_marginBottom="20dp"/>
+            android:textColor="@color/white"
+            android:textSize="30sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:textColor="@color/white"
+            android:layout_marginStart="10dp"
             android:text="Recent Movies"
-            android:layout_marginLeft="10dp"/>
+            android:textColor="@color/white"
+            android:textSize="20sp" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewMoviesHomePage"
+            android:id="@+id/recyclerViewHomePageMovies"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -43,14 +43,14 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:textColor="@color/white"
+            android:layout_marginStart="10dp"
             android:text="Recent Series"
-            android:layout_marginLeft="10dp"/>
+            android:textColor="@color/white"
+            android:textSize="20sp" />
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewSeriesHomePage"
+            android:id="@+id/recyclerViewHomePageSeries"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -58,6 +58,23 @@
             android:scrollbars="horizontal"
             tools:ignore="SpeakableTextPresentCheck"
             tools:listitem="@layout/recycler_item" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Recent Books"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Coming Soon..."
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
 
     </LinearLayout>
 

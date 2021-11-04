@@ -6,12 +6,8 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.add
-import androidx.fragment.app.commit
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.example.myshelf.Fragments.SearchPageFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationView
 
 
 /**
@@ -19,11 +15,11 @@ import com.google.android.material.navigation.NavigationView
  * @author enesdurmus
  */
 
-class DashBoardActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+class MainContainerActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_dash_board)
+        setContentView(R.layout.activity_main_container)
 
         var user = intent.getSerializableExtra(MainMenuActivityKey) as User
         Toast.makeText(this, user._userName, Toast.LENGTH_SHORT).show()
@@ -31,9 +27,6 @@ class DashBoardActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
         val bottomNavigationView: BottomNavigationView
         bottomNavigationView = findViewById<View>(R.id.bottom_navigation) as BottomNavigationView
         bottomNavigationView.setOnItemSelectedListener(this)
-
-       // bottomNavigationView.setOnNavigationItemSelectedListener(myNavigationItemListener)
-      //  bottomNavigationView.selectedItemId = R.id.my_menu_item_id
 
         /*val recycler1 = findViewById<RecyclerView>(R.id.recyclerViewMoviesHomePage)
         val recycler2 = findViewById<RecyclerView>(R.id.recyclerViewSeriesHomePage)
@@ -66,6 +59,8 @@ class DashBoardActivity : AppCompatActivity(), BottomNavigationView.OnNavigation
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         if(item.itemId == R.id.navBarHome){
             ChangeFragment(HomePageFragment())
+        }else if(item.itemId == R.id.navBarSearchPage){
+            ChangeFragment(SearchPageFragment())
         }
         return true
     }
