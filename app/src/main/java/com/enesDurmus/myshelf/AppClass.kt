@@ -1,4 +1,4 @@
-package com.example.myshelf
+package com.enesDurmus.myshelf
 
 import android.app.Application
 import android.content.Context

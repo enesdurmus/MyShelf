@@ -1,4 +1,4 @@
-package com.example.myshelf
+package com.enesDurmus.myshelf
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +7,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.Toast
+import com.enesDurmus.myshelf.Activities.CreateAccountActivity
+import com.enesDurmus.myshelf.Activities.MainContainerActivity
 
 
 /**

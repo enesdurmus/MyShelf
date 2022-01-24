@@ -1,13 +1,15 @@
-package com.example.myshelf
+package com.enesDurmus.myshelf.Fragments
 
 import android.os.Bundle;
-import android.util.Log
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.enesDurmus.myshelf.Adapters.HorizontalAdapter
+import com.enesDurmus.myshelf.AppClass
+import com.enesDurmus.myshelf.R
 
 /**
  *

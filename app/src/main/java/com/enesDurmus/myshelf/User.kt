@@ -1,4 +1,4 @@
-package com.example.myshelf
+package com.enesDurmus.myshelf
 
 import java.io.Serializable
 

@@ -18,13 +18,14 @@
 
 
     <LinearLayout
+        android:id="@+id/topContainerSearchPage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/textSearchPage"
             android:layout_width="230dp"
             android:layout_height="50dp"
             android:ems="10"
@@ -42,15 +43,26 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="77dp"
-        android:layout_marginTop="162dp"
-        android:text="Button" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/topContainerSearchPage"
+        android:orientation="vertical">
 
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewSearchPage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            android:scrollbars="vertical"
+            tools:listitem="@layout/recycler_item_search"/>
+
+    </LinearLayout>
 
 </RelativeLayout>

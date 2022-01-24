@@ -1,11 +1,11 @@
-package com.example.myshelf.Fragments
+package com.enesDurmus.myshelf.Fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.myshelf.R
+import com.enesDurmus.myshelf.R
 
 class ShelfPageFragment : Fragment() {
 

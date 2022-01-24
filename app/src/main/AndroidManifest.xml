@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.myshelf">
+    package="com.enesDurmus.myshelf">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -13,11 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyShelf">
         <activity
-            android:name=".CreateAccountActivity"
+            android:name=".Activities.CreateAccountActivity"
             android:exported="false"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".MainContainerActivity"
+            android:name=".Activities.MainContainerActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

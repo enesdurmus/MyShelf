@@ -1,4 +1,4 @@
-package com.example.myshelf
+package com.enesDurmus.myshelf
 
 import android.content.Context
 import android.util.Log

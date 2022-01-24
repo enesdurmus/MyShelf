@@ -1,4 +1,4 @@
-package com.example.myshelf
+package com.enesDurmus.myshelf
 
 class Movie(name: String, imageUrl: String) {
 

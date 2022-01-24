@@ -1,10 +1,11 @@
-package com.example.myshelf
+package com.enesDurmus.myshelf.Adapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.enesDurmus.myshelf.R
 import com.squareup.picasso.Picasso
 
 class HorizontalAdapter(val list: ArrayList<String>) :
@@ -12,8 +13,7 @@ class HorizontalAdapter(val list: ArrayList<String>) :
     class MyView(view: View) : RecyclerView.ViewHolder(view) {
         var imageView: ImageView
         init {
-            imageView = view
-                .findViewById<ImageView>(R.id.image)
+            imageView = view.findViewById<ImageView>(R.id.image)
         }
     }
 
@@ -21,7 +21,7 @@ class HorizontalAdapter(val list: ArrayList<String>) :
         val itemView: View = LayoutInflater
             .from(parent.context)
             .inflate(
-                R.layout.recycler_item,
+                R.layout.recycler_item_horizontal,
                 parent,
                 false
             )
@@ -33,7 +33,6 @@ class HorizontalAdapter(val list: ArrayList<String>) :
 
         //Loading Image into view
         Picasso.get().load(listData).placeholder(R.mipmap.ic_launcher).into(holder.imageView)
-
     }
 
     override fun getItemCount(): Int {

@@ -1,4 +1,4 @@
-package com.example.myshelf
+package com.enesDurmus.myshelf.Activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,7 +6,11 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.myshelf.Fragments.SearchPageFragment
+import com.enesDurmus.myshelf.Fragments.HomePageFragment
+import com.enesDurmus.myshelf.MainMenuActivityKey
+import com.enesDurmus.myshelf.R
+import com.enesDurmus.myshelf.User
+import com.enesDurmus.myshelf.Fragments.SearchPageFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 

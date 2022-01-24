@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
-    tools:context=".HomePageFragment">
+    tools:context=".Fragments.HomePageFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,12 +33,12 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewHomePageMovies"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="140dp"
             android:orientation="horizontal"
             android:padding="8dp"
             android:scrollbars="horizontal"
             tools:ignore="SpeakableTextPresentCheck"
-            tools:listitem="@layout/recycler_item" />
+            tools:listitem="@layout/recycler_item_horizontal" />
 
         <TextView
             android:layout_width="match_parent"
@@ -52,12 +52,12 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewHomePageSeries"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="140dp"
             android:orientation="horizontal"
             android:padding="8dp"
             android:scrollbars="horizontal"
             tools:ignore="SpeakableTextPresentCheck"
-            tools:listitem="@layout/recycler_item" />
+            tools:listitem="@layout/recycler_item_horizontal" />
 
         <TextView
             android:layout_width="match_parent"
@@ -68,6 +68,7 @@
             android:textSize="20sp" />
 
         <TextView
+            android:id="@+id/spinnerSearchPage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"

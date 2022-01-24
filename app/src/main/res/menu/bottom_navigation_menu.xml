@@ -15,4 +15,9 @@
         android:enabled="true"
         android:title="My Shelf"
         android:icon="@drawable/image_shelf"/>
+    <item
+        android:id="@+id/navBarProfile"
+        android:enabled="true"
+        android:title="Profile"
+        android:icon="@drawable/ic_action_user"/>
 </menu>
